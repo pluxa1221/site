@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Статус сервера Minecraft</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Статус сервера Minecraft</h1>
+        
+        {% if server.error %}
+            <div class="error">
+                {{ server.error }}
+            </div>
+        {% else %}
+            <div class="server-card">
+                <h2>{{ server.name }}</h2>
+                
+                <div class="info">
+                    <span>IP:</span> {{ server.ip }}:{{ server.port }}
+                </div>
+                
+                <div class="status {{ 'online' if server.online else 'offline' }}">
+                    Статус: {{ 'Онлайн' if server.online else 'Оффлайн' }}
+                </div>
+                
+                {% if server.online %}
+                    <div class="players">
+                        Игроков: {{ server.players }} / {{ server.max_players }}
+                    </div>
+                {% endif %}
+            </div>
+        {% endif %}
+        
+        <div class="refresh">
+            <a href="{{ url_for('index') }}">Обновить</a>
+        </div>
+    </div>
+</body>
+</html>
