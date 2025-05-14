@@ -1,0 +1,80 @@
+body {
+    background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+    font-family: 'Segoe UI', sans-serif;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    text-align: center;
+}
+
+h1 {
+    color: #00c9a7;
+    margin-bottom: 30px;
+}
+
+.server-card {
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    padding: 25px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+}
+
+.server-card:hover {
+    transform: scale(1.02);
+}
+
+.info {
+    margin: 15px 0;
+    font-size: 1.2em;
+}
+
+.status {
+    padding: 10px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.status.online {
+    background-color: #28a745;
+}
+
+.status.offline {
+    background-color: #dc3545;
+}
+
+.players {
+    margin-top: 15px;
+    font-size: 1.1em;
+    color: #00c9a7;
+}
+
+.error {
+    color: #ff4d4d;
+    font-size: 1.2em;
+    margin: 20px;
+}
+
+.refresh {
+    margin-top: 30px;
+}
+
+.refresh a {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.refresh a:hover {
+    background-color: #0056b3;
+}
