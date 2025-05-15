@@ -1,5 +1,6 @@
+import urllib.request
 from flask import Flask, render_template, abort
-import mistune, os
+import mistune, os, socket, urllib, ssl, mctools
 
 app = Flask(__name__)
 app.config['DOCS_FOLDER'] = 'docs'
@@ -49,37 +50,93 @@ SERVICES = [
         "name": "Plane",
         "description": "Система управления проектами",
         "url": "http://103.88.242.164:1610/nevetime/",
+        "type": "http",
         "icon": "fas fa-project-diagram"
     },
     {
         "name": "MCSManager",
         "description": "Панель управления серверами",
         "url": "http://192.168.31.113:23333/",
+        "type": "http",
         "icon": "fas fa-server"
     },
     {
         "name": "Telegram-чат",
         "description": "Группа для общения",
         "url": "https://t.me/+QS7d55g7SO41MDZ ",
+        "type": "no status",
         "icon": "fab fa-telegram"
     },
     {
         "name": "Minecraft-сервер",
         "description": "IP: 109.174.55.9:25575",
         "url": "minecraft://109.174.55.9:25575",
+        "type": "minecraft",
         "icon": "fas fa-gamepad"
     }
 ]
 
+def check_http_service(url, timeout=3):
+    """Проверяет доступность HTTP-сервиса."""
+    try:
+        context = ssl._create_unverified_context()
+        response = urllib.request.urlopen(url, timeout=timeout, context=context)
+        return response.status == 200
+    except Exception:
+        return False
+
+def check_minecraft_service(host, port, timeout=3):
+    """Проверяет доступность Minecraft-сервиса."""
+    try:
+        ping = mctools.PINGClient(host, port, proto_num=0, timeout=timeout)
+
+        ping.ping()
+        return True 
+    except TimeoutError:
+        return False
+
+    # try:
+    #     with socket.create_connection((host, port), timeout=timeout):
+    #         return True
+    # except Exception:
+    #     return False
+
+def get_server_statuses():
+    """Динамически получает статусы серверов."""
+    statuses = []
+
+    # Проверка HTTP-сервисов
+    for service in SERVICES:
+        status = False
+        match service["type"]:
+            case "http":
+                status = check_http_service(service["url"])
+            case "minecraft":
+                host_port = service["url"][12:].split(":")
+                if len(host_port) == 2:
+                    host, port = host_port[0], int(host_port[1])
+                    status = check_minecraft_service(host, port)
+            case "no status":
+                status = True
+
+        statuses.append({
+            "name": service["name"],
+            "status": status
+        })
+
+    return statuses
+
 # Статический статус серверов (временно)
-SERVER_STATUSES = [
-    {"name": "Plane", "status": True},  # Пример: Plane онлайн
-    {"name": "MCSManager", "status": True},  # Пример: MCSManager оффлайн
-    {"name": "Minecraft", "status": True}  # Пример: Minecraft онлайн
-]
+# SERVER_STATUSES = [
+#     {"name": "Plane", "status": True},  # Пример: Plane онлайн
+#     {"name": "MCSManager", "status": True},  # Пример: MCSManager оффлайн
+#     {"name": "Minecraft", "status": True}  # Пример: Minecraft онлайн
+# ]
 
 @app.route("/")
 def index():
+    SERVER_STATUSES = get_server_statuses()
+
     return render_template(
         "index.html", 
         services=SERVICES, 
