@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block title %}{{ page.title }} — NeveTime{% endblock %}
+
+{% block content %}
+<section class="wiki-article">
+    <a href="/wiki" class="back-link">&larr; Назад к списку</a>
+    {{ page.html_content|safe }}
+    <a href="{{ page.url }}" class="btn" target="_blank">Перейти к сервису</a>
+</section>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}Wiki — NeveTime{% endblock %}
+
+{% block content %}
+<section class="wiki-index">
+    <h2 class="section-title">Документация по сервисам</h2>
+    <p class="section-description">Найдите нужный сервис и изучите подробную информацию.</p>
+    <div class="wiki-cards">
+        {% for key, page in wiki.items() %}
+        <div class="wiki-card">
+            <h3>{{ page.title }}</h3>
+            <p>Краткое описание доступной информации о сервисе.</p>
+            <a href="{{ url_for('wiki_page', service=key) }}" class="card-btn">Читать далее</a>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}
