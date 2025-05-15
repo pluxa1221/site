@@ -11,6 +11,26 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
 // Обновление статуса серверов
 function updateStatus() {
-    // Реализуйте запрос к Flask API для получения актуального статуса
-    alert("Статус обновлен!");
+    // Запрос к Flask API для получения актуального статуса
+    fetch('/api/status') // Укажите актуальный путь к API
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Ошибка сети');
+            }
+            return response.json();
+        })
+        .then(data => {
+            // Пример обновления статуса на странице
+            data.servers.forEach(server => {
+                const statusElement = document.getElementById(`status-${server.id}`);
+                if (statusElement) {
+                    statusElement.textContent = server.status;
+                    statusElement.className = `status ${server.status}`; // Добавление класса для стилизации
+                }
+            });
+        })
+        .catch(error => {
+            console.error('Ошибка загрузки статуса:', error);
+            alert('Не удалось обновить статус серверов');
+        });
 }
