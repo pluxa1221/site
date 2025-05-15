@@ -1,11 +1,5 @@
 from flask import Flask, render_template, abort
-import mistune
-
-app = Flask(__name__)
-
-import os
-import mistune
-from flask import Flask, render_template, abort
+import mistune, os
 
 app = Flask(__name__)
 app.config['DOCS_FOLDER'] = 'docs'
