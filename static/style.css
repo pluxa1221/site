@@ -1,0 +1,303 @@
+/* Основные стили */
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    background-color: #121212; /* Темный фон */
+    color: #E0E0E0; /* Светлый текст */
+    line-height: 1.6;
+}
+
+/* Навигация */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #1C1C1C;
+    padding: 1rem 2rem;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+}
+
+.nav-links {
+    list-style: none; /* Убираем маркеры */
+    padding: 0;
+    margin: 0;
+    margin-right: 3rem;
+}
+
+.nav-links li {
+    display: inline-block; /* Выравниваем в строку */
+    margin: 0 1rem;
+}
+
+.nav-links a {
+    color: #2ECC71;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: #27AE60;
+}
+
+.logo {
+    font-family: 'Pacifico', cursive;
+    font-size: 1.5rem;
+    color: #2ECC71;
+}
+
+/* Hero Section */
+.hero {
+    padding: 8rem 2rem 4rem;
+    text-align: center;
+    background: linear-gradient(to bottom, #121212, #1C1C1C); /* Плавный переход */
+}
+
+.title {
+    font-family: 'Pacifico', cursive;
+    font-size: 3rem;
+    color: #2ECC71; /* Мягкий акцент */
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    margin: 1rem 0 2rem;
+}
+
+.btn {
+    background: #2ECC71; /* Мягкая кнопка */
+    color: #121212;
+    padding: 0.8rem 1.5rem;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background 0.3s;
+}
+
+.btn:hover {
+    background: #27AE60; /* Более тёмный при наведении */
+}
+
+/* Сервисы */
+.services {
+    padding: 4rem 2rem;
+    background: #1C1C1C; /* Единообразие с навигацией */
+}
+
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.card {
+    background: #2A2A2A; /* Более тёмный карточный фон */
+    padding: 2rem;
+    border-radius: 10px;
+    width: 300px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(46, 204, 113, 0.2); /* Мягкая тень */
+}
+
+.card i {
+    font-size: 2rem;
+    color: #2ECC71; /* Иконки в том же тоне */
+    margin-bottom: 1rem;
+}
+
+.card-btn {
+    display: inline-block;
+    margin-top: 1rem;
+    background: #2ECC71;
+    color: #121212;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+/* Статус серверов */
+.status {
+    padding: 4rem 2rem;
+    background: #121212;
+}
+
+.status-cards {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.status-card {
+    background: #2A2A2A;
+    padding: 1.5rem;
+    border-radius: 10px;
+    text-align: center;
+    min-width: 200px;
+}
+
+.status-indicator {
+    width: 20px;
+    height: 20px;
+    margin: 0.5rem auto;
+    border-radius: 50%;
+    background-color: #E74C3C; /* Мягкий красный для оффлайн */
+}
+
+.status-card.online .status-indicator {
+    background-color: #2ECC71; /* Мягкий онлайн */
+}
+
+.refresh-btn {
+    margin-top: 2rem;
+    background: #2ECC71;
+    color: #121212;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Футер */
+.footer {
+    text-align: center;
+    padding: 2rem;
+    background: #1C1C1C;
+    color: #888;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .cards, .status-cards {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+/* Wiki Index */
+.wiki-index {
+    padding: 4rem 2rem;
+    background: #1C1C1C;
+    text-align: center;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    color: #2ECC71;
+    margin-bottom: 1rem;
+}
+
+.section-description {
+    font-size: 1.1rem;
+    color: #bbb;
+    margin-bottom: 3rem;
+}
+
+.wiki-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.wiki-card {
+    background: #2A2A2A;
+    padding: 2rem;
+    border-radius: 10px;
+    width: 300px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.wiki-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(46, 204, 113, 0.2);
+}
+
+.card-btn {
+    display: inline-block;
+    margin-top: 1rem;
+    background: #2ECC71;
+    color: #121212;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+/* Wiki Article */
+.wiki-article {
+    padding: 4rem 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.back-link {
+    display: inline-block;
+    color: #2ECC71;
+    text-decoration: none;
+    /* margin-bottom: 1rem; */
+    font-weight: bold;
+    padding-top: 2rem;
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}
+
+/* Стили для Markdown */
+.wiki-article h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: #2ECC71;
+}
+
+.wiki-article h2 {
+    font-size: 2rem;
+    margin-top: 2rem;
+    color: #2ECC71;
+}
+
+.wiki-article h3 {
+    font-size: 1.5rem;
+    margin-top: 1.5rem;
+    color: #2ECC71;
+}
+
+.wiki-article ul, .wiki-article ol {
+    margin-left: 1.5rem;
+    padding-left: 1rem;
+}
+
+.wiki-article table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+}
+
+.wiki-article th, .wiki-article td {
+    border: 1px solid #333;
+    padding: 0.5rem;
+    color: #e0e0e0;
+}
+
+.wiki-article code {
+    background: #1C1C1C;
+    padding: 0.2rem 0.4rem;
+    border-radius: 3px;
+    color: #2ECC71;
+    font-family: monospace;
+}
+
+.wiki-article pre {
+    background: #1C1C1C;
+    padding: 1rem;
+    border-radius: 5px;
+    overflow-x: auto;
+    color: #2ECC71;
+    font-family: monospace;
+    white-space: pre-wrap;
+}
