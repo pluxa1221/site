@@ -6,6 +6,6 @@
 <section class="wiki-article">
     <a href="/wiki" class="back-link">&larr; Назад к списку</a>
     {{ page.html_content|safe }}
-    <a href="{{ page.url }}" class="btn" target="_blank">Перейти к сервису</a>
+    {% if page.url != "not found" %}<a href="{{ page.url }}" class="btn" target="_blank">Перейти к сервису</a>{% endif %}
 </section>
 {% endblock %}

@@ -1,6 +1,6 @@
 import urllib.request
 from flask import Flask, render_template, abort
-import mistune, os, socket, urllib, ssl, mctools
+import mistune, os, urllib, ssl, mctools
 from pprint import pprint
 
 app = Flask(__name__)
@@ -38,7 +38,9 @@ def get_service_url(slug):
         "plane": "http://103.88.242.164:1610/nevetime/",
         "mcsmanager": "http://192.168.31.113:23333/",
         "telegram": "https://t.me/+QS7d55g7SO41MDZ ",
-        "minecraft": "minecraft://109.174.55.9:25575"
+        "minecraft": "minecraft://109.174.55.9:25575",
+        "playit": "https://playit.gg/",
+        "java": "not found"
     }
     return urls.get(slug, "#")
 
@@ -161,9 +163,7 @@ def wiki_page(service):
 
 @app.route("/api/status")
 def api_status():
-    statuses = get_server_statuses()
-    pprint(statuses)
-    return {"status": "ok", "data": statuses}
+    return {"status": "ok", "data": get_server_statuses()}
 
 if __name__ == "__main__":
     app.run(debug=True)
