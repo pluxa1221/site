@@ -1,6 +1,7 @@
 import urllib.request
 from flask import Flask, render_template, abort
 import mistune, os, socket, urllib, ssl, mctools
+from pprint import pprint
 
 app = Flask(__name__)
 app.config['DOCS_FOLDER'] = 'docs'
@@ -47,6 +48,7 @@ WIKI_PAGES = load_wiki_pages()
 # Данные сервисов
 SERVICES = [
     {
+        "id": 0,
         "name": "Plane",
         "description": "Система управления проектами",
         "url": "http://103.88.242.164:1610/nevetime/",
@@ -54,6 +56,7 @@ SERVICES = [
         "icon": "fas fa-project-diagram"
     },
     {
+        "id": 1,
         "name": "MCSManager",
         "description": "Панель управления серверами",
         "url": "http://192.168.31.113:23333/",
@@ -61,6 +64,7 @@ SERVICES = [
         "icon": "fas fa-server"
     },
     {
+        "id": 2,
         "name": "Telegram-чат",
         "description": "Группа для общения",
         "url": "https://t.me/+QS7d55g7SO41MDZ ",
@@ -68,6 +72,7 @@ SERVICES = [
         "icon": "fab fa-telegram"
     },
     {
+        "id": 3,
         "name": "Minecraft-сервер",
         "description": "IP: 109.174.55.9:25575",
         "url": "minecraft://109.174.55.9:25575",
@@ -153,6 +158,12 @@ def wiki_page(service):
         abort(404)
     page = WIKI_PAGES[service]
     return render_template("wiki_page.html", page=page)
+
+@app.route("/api/status")
+def api_status():
+    statuses = get_server_statuses()
+    pprint(statuses)
+    return {"status": "ok", "data": statuses}
 
 if __name__ == "__main__":
     app.run(debug=True)

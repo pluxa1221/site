@@ -1,16 +1,32 @@
-// Плавный скролл
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({ behavior: 'smooth' });
-        }
-    });
-});
+function updateStatuses() {
+  fetch('/api/status')
+    .then(response => response.json())
+    .then(data => {
+      const statuses = data.data;
 
-// Обновление статуса серверов
-function updateStatus() {
-    // Реализуйте запрос к Flask API для получения актуального статуса
-    alert("Статус обновлен!");
+      // Очищаем текущий вывод
+      const container = document.getElementById('server-status');
+      container.innerHTML = ''; // Очистка старых данных
+
+      // Вставляем обновленные статусы
+      statuses.forEach(service => {
+        const div = document.createElement('div');
+        div.className = 'server-item';
+        div.dataset.service = service.name;
+
+        const statusText = service.status ? '🟢 Онлайн' : '🔴 Оффлайн';
+        div.innerHTML = `<strong>${service.name}</strong>: ${statusText}`;
+        
+        container.appendChild(div);
+      });
+    })
+    .catch(err => {
+      console.error("Ошибка при получении статуса:", err);
+    })
 }
+
+// Первый вызов сразу
+updateStatuses();
+
+// Обновление каждые 10 секунд
+setInterval(updateStatuses, 10000);

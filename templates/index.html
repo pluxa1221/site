@@ -38,6 +38,7 @@
                 <i class="{{ service.icon }}"></i>
                 <h3>{{ service.name }}</h3>
                 <p>{{ service.description }}</p>
+                <!-- <span class="status-text">{{ '🟢 Онлайн' if server_status[service.id].status else '🔴 Оффлайн' }}</span><br> -->
                 <a href="{{ service.url }}" target="_blank" class="card-btn">Открыть</a>
             </div>
             {% endfor %}
@@ -50,17 +51,17 @@
         <div class="status-cards">
             {% for server in server_status %}
             <div class="status-card {{ 'online' if server.status else 'offline' }}">
-                <span>{{ server.name }}</span>
-                <div class="status-indicator"></div>
+                <span>{{ server.name }}</span><br>
+                <span class="status-text">{{ '🟢 Онлайн' if server.status else '🔴 Оффлайн' }}</span>
+                <!-- <div class="status-indicator"></div> -->
             </div>
             {% endfor %}
         </div>
-        <button onclick="updateStatus()" class="refresh-btn">Обновить статус</button>
     </section>
 
     <!-- Футер -->
     <footer class="footer">
-        <p>&copy; 2024 NeveTime. Все права защищены.</p>
+        <p>&copy; 2025 NeveTime. Все права не защищены.</p>
     </footer>
 
     <!-- JS для анимаций и обновления статуса -->
